@@ -17,6 +17,7 @@
 #include <vector>
 #include <ctime>
 #include <chrono>
+#include <boost/filesystem.hpp>
 #include "render/box.h"
 
 template<typename PointT>
