@@ -7,6 +7,10 @@
 #include <string>
 #include "kdtree.h"
 
+#ifndef uint
+#define uint unsigned int
+#endif
+
 // Arguments:
 // window is the region to draw box around
 // increase zoom to see more of the area
