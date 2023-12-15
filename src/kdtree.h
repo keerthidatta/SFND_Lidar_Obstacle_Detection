@@ -46,8 +46,7 @@ struct KdTree
 		}
 		else
 		{
-			//bool insertLeft = ((depth % 2 == 0) && (point[0] < node->point[0])) || ((depth % 2 != 0) && (point[1] < node->point[1]));
-			int currentDepth = depth % 2;
+			int currentDepth = depth % 3;
 			bool insertLeft = (point[currentDepth] < node->point[currentDepth]);
 			if(insertLeft)
 				insertHelper(node->left, point, id, depth+1);
@@ -69,12 +68,14 @@ struct KdTree
 		float y_min = target[1] - distanceTol;
 		float x_max = target[0] + distanceTol;
 		float y_max = target[1] + distanceTol;
-		return ((point[0] >= x_min) && (point[0] <= x_max) && (point[1] >= y_min) && (point[1] <= y_max)); 
+		float z_min = target[2] - distanceTol;
+		float z_max = target[2] + distanceTol;
+		return ((point[0] >= x_min) && (point[0] <= x_max) && (point[1] >= y_min) && (point[1] <= y_max) && (point[2] >= z_min) && (point[2] <= z_max)); 
 	}
 
 	float distance(std::vector<float> point, std::vector<float> target)
 	{
-		return std::sqrt(std::pow((target[1]-point[1]), 2) + std::pow((target[0]-point[0]), 2));
+		return std::sqrt(std::pow((target[1]-point[1]), 2) + std::pow((target[0]-point[0]), 2) + std::pow((target[2]-point[2]), 2));
 	}
 
 	void searchHelper(Node* &node, std::vector<float> target, std::vector<int> &ids, float distanceTol, int depth)
@@ -86,8 +87,7 @@ struct KdTree
 			{
 				ids.push_back(node->id);
 			}
-			
-			int currentDepth = depth % 2;
+			int currentDepth = depth % 3;
 			bool searchLeft = ((target[currentDepth] - distanceTol) < point[currentDepth]);
 			bool searchRight = ((target[currentDepth] + distanceTol) > point[currentDepth]);
 
