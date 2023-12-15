@@ -75,8 +75,6 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
   // TODO: Create two new point clouds, one cloud with obstacles and other with segmented plane
     typename pcl::PointCloud<PointT>::Ptr plane (new pcl::PointCloud<PointT>());
     typename pcl::PointCloud<PointT>::Ptr obstacles (new pcl::PointCloud<PointT>());
-    //pcl::PointCloud<pcl::PointXYZ> *plane = new pcl::PointCloud<pcl::PointXYZ>();
-    //pcl::PointCloud<pcl::PointXYZ> *obstacles = new pcl::PointCloud<pcl::PointXYZ>();
     
     for (auto index : inliers->indices)
     {
@@ -243,7 +241,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::e
     }
 
 	std::vector<std::vector<int>> clusters;
-    std::vector<pcl::PointCloud<PointT>::Ptr> cloudClusters;
+    std::vector<typename pcl::PointCloud<PointT>::Ptr> cloudClusters;
 
 	std::vector<bool> processed (points.size(), false);
 	
@@ -261,7 +259,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::e
 
     for (auto cluster : clusters)
     {
-        pcl::PointCloud<PointT>::Ptr cloudCluster(new pcl::PointCloud<PointT>());
+        typename pcl::PointCloud<PointT>::Ptr cloudCluster(new pcl::PointCloud<PointT>());
         for(auto indice : cluster)
         {
             PointT point;
@@ -305,7 +303,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
 
     for (const auto& cluster : cluster_indices)
     {
-        pcl::PointCloud<PointT>::Ptr cloud_cluster (new pcl::PointCloud<PointT>);
+        typename pcl::PointCloud<PointT>::Ptr cloud_cluster (new pcl::PointCloud<PointT>);
         for (const auto& idx : cluster.indices) 
         {
             cloud_cluster->push_back((*cloud)[idx]);
